@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Song from "./components/Song";
-// import data from "./track";
 import "./index.css";
 import axios from "axios";
 import url from "./spotify/spotify";
@@ -9,13 +8,20 @@ function App() {
   const [token, setToken] = useState("");
   const [searchSong, setSearchSong] = useState("");
   const [songData, setSongsData] = useState([]);
+  const [selectedSong, setSelectedSong] = useState([]);
+  const [combinedSongs, setCombinedSongs] = useState([]);
 
   useEffect(() => {
     const queryString = new URL(window.location.href.replace("#", "?"))
       .searchParams;
     const accessToken = queryString.get("access_token");
     setToken(accessToken);
-  }, []);
+    const handleCombinedSong = songData.map((song) => ({
+      ...song,
+      isSelected: selectedSong.find((data) => data === song.uri),
+    }));
+    setCombinedSongs(handleCombinedSong);
+  }, [songData, selectedSong]);
 
   const getSong = async () => {
     await axios
@@ -28,6 +34,13 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handleSelectedSong = (uri) => {
+    const selected = selectedSong.find((song) => song === uri);
+    selected
+      ? setSelectedSong(selectedSong.filter((song) => song !== uri))
+      : setSelectedSong([...selectedSong, uri]);
   };
 
   return (
@@ -54,14 +67,17 @@ function App() {
         </div>
       </div>
       <div className="playlist-songs">
-        {songData.map((song) => {
-          const { id, name, album, artists } = song;
+        {combinedSongs.map((song) => {
+          const { uri, name, album, artists, isSelected } = song;
           return (
             <Song
-              key={id}
+              key={uri}
+              uri={uri}
               image={album.images[0]?.url}
               title={name}
               album={artists[0]?.name}
+              selectState={handleSelectedSong}
+              isSelected={isSelected}
             />
           );
         })}
