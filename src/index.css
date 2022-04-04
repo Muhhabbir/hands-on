@@ -32,7 +32,12 @@ body {
 button {
   cursor: pointer;
 }
-
+.playlist-search{
+  margin-bottom: 30px;
+}
+.form-group {
+  margin-bottom: 30px;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
