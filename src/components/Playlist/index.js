@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { createPlaylist, pushSongs } from "../../api/service";
 
 const Playlist = ({ token, userId, songUris }) => {
   const [playlistID, setPlaylistID] = useState("");
@@ -22,47 +22,22 @@ const Playlist = ({ token, userId, songUris }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (form.title.length > 10) {
-      await axios
-        .post(
-          `https://api.spotify.com/v1/users/${userId}/playlists`,
-          {
-            name: form.name,
-            description: form.description,
-            public: false,
-            collaborative: false,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+      await createPlaylist(userId, form.title, form.description)
         .then((response) => {
           setPlaylistID(response.data.id);
         })
         .catch((error) => {
           console.log(error);
         });
-      setForm({ name: "", description: "" });
-      alert("Playlist created!");
+      setForm({ title: "", description: "" });
+      alert("Successfully created playlist");
     } else {
-      alert("Playlist name must be at least 10 characters long!");
+      alert("Playlist title must be at least 10 characters long");
     }
   };
 
   const addSongToPlaylist = async (id) => {
-    await axios
-      .post(
-        `https://api.spotify.com/v1/playlists/${id}/tracks`,
-        {
-          uris: songUris,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+    pushSongs(playlistID, songUris)
       .then((response) => {
         console.log(response);
       })
