@@ -1,19 +1,18 @@
 import { useSelector } from "react-redux";
-import "./index.css";
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
   Switch,
 } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
 import PlaylistPage from "./pages/PlaylistPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   const token = useSelector((state) => state.token.value);
 
   return (
-    <div className="App">
+    <div className="p-5 bg-neutral-900 h-screen space-y-5 overflow-auto">
       <Router>
         <Switch>
           <Route exact path="/">
@@ -23,7 +22,6 @@ function App() {
             <PlaylistPage />
           </Route>
           <Route path="*">
-            <h1>Error 404</h1>
           </Route>
         </Switch>
       </Router>

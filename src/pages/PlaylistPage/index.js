@@ -1,78 +1,56 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Song from "../../components/Song";
-import Playlist from "../../components/Playlist";
-import { retrieveSongs, retrieveUserID } from "../../api/service";
+import Search from "../../components/Search";
+import { retrieveSongs } from "../../api/axios";
+
+import Form from "../../components/Form";
 
 const PlaylistPage = () => {
   const token = useSelector((state) => state.token.value);
-
-  const [userID, setUserID] = useState("");
   const [searchSong, setSearchSong] = useState("");
-  const [songData, setSongsData] = useState([]);
-  const [selectedSong, setSelectedSong] = useState([]);
-  const [combinedSongs, setCombinedSongs] = useState([]);
+  const [songData, setSongData] = useState([]);
+  const [selectedSongs, setSelectedSongs] = useState([]);
+  const [combineSongs, setCombineSongs] = useState([]);
 
   useEffect(() => {
-    getUserID();
-    const handleCombinedSong = songData.map((song) => ({
+    const handleCombineTracks = songData.map((song) => ({
       ...song,
-      isSelected: selectedSong.find((data) => data === song.uri),
+      isSelected: selectedSongs.find((data) => data === song.uri),
     }));
-    setCombinedSongs(handleCombinedSong);
-  }, [songData, selectedSong]);
+    setCombineSongs(handleCombineTracks);
+  }, [songData, selectedSongs]);
 
   const getSong = () => {
-    retrieveSongs(searchSong)
+    retrieveSongs(searchSong, token)
       .then((response) => {
-        setSongsData(response.data.tracks.items);
+        setSongData(response.data.tracks.items);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const getUserID = () => {
-    retrieveUserID()
-      .then((response) => {
-        setUserID(response.data.id);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const handleSelectedSong = (uri) => {
-    const selected = selectedSong.find((song) => song === uri);
+  const handleSelect = (uri) => {
+    const selected = selectedSongs.find((song) => song === uri);
     selected
-      ? setSelectedSong(selectedSong.filter((song) => song !== uri))
-      : setSelectedSong([...selectedSong, uri]);
+      ? setSelectedSongs(selectedSongs.filter((song) => song !== uri))
+      : setSelectedSongs([...selectedSongs, uri]);
   };
 
   return (
     <div>
       <div className="playlist-header">
-        <h1>Playlist</h1>
+        <h2>
+          Create Playlist
+        </h2>
       </div>
-      <div className="playlist-search">
-        <div className="search-box">
-          <div className="input-group mb-3">
-            <input
-              type="search"
-              className="form-control"
-              placeholder="Search"
-              onChange={(e) => setSearchSong(e.target.value)}
-            />
-            <button className="btn btn-primary" type="button" onClick={getSong}>
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
-      <Playlist token={token} userID={userID} songUris={selectedSong} />
-      <div className="playlist-songs">
-        {combinedSongs.map((song) => {
-          const { uri, name, album, artists, isSelected } = song;
+      <Search getSong={getSong} setSearchSong={setSearchSong} />
+      <Form songUris={selectedSongs} />
+
+      <div className="song-list">
+        {combineSongs.map((song) => {
+          const { uri, name, artists, album, isSelected } = song;
           return (
             <Song
               key={uri}
@@ -80,7 +58,7 @@ const PlaylistPage = () => {
               image={album.images[0]?.url}
               title={name}
               album={artists[0]?.name}
-              selectState={handleSelectedSong}
+              selectState={handleSelect}
               isSelected={isSelected}
             />
           );
