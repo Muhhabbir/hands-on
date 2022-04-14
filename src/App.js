@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import PlaylistPage from "./pages/PlaylistPage";
 import LoginPage from "./pages/LoginPage";
+import "./index.css";
 
 function App() {
   const token = useSelector((state) => state.token.value);

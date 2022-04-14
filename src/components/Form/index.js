@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import {
-  retrieveUserId,
-  createPlaylist,
-  pushSongs,
-} from "../../api/axios";
+import { retrieveUserId, createPlaylist, pushSongs } from "../../api/axios";
 
 const Form = ({ songUris }) => {
   const token = useSelector((state) => state.token.value);
@@ -67,11 +63,9 @@ const Form = ({ songUris }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-container">
-        <div>
+        <div className="playlist-box">
           <div className="form-title">
-            <label htmlFor="title" className="form-title-text">
-              Title
-            </label>
+            <label htmlFor="title" className="form-title-text"></label>
             <input
               type="text"
               className="form-title-input"
@@ -82,9 +76,7 @@ const Form = ({ songUris }) => {
             />
           </div>
           <div className="form-desc">
-            <label htmlFor="title" className="form-desc-text">
-              Description
-            </label>
+            <label htmlFor="title" className="form-desc-text"></label>
             <input
               type="text"
               className="form-desc-input"
@@ -95,11 +87,7 @@ const Form = ({ songUris }) => {
             />
           </div>
           <div>
-            <button
-              id="submit"
-              type="submit"
-              className="createplaylist-button"
-            >
+            <button id="submit" type="submit" className="createplaylist-button">
               Create
             </button>
           </div>
