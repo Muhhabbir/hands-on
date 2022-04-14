@@ -1,21 +1,32 @@
+import {
+    Box,
+    Button,
+    Center,
+    InputGroup,
+    Input,
+  } from "@chakra-ui/react";
+
 const Search = ({ setSearchSong, getSong }) => {
     return (
-          <div className="search-container">
-            <input
-              type="search"
-              className="search-input"
-              placeholder="Search"
-              aria-label="Search"
-              onChange={(e) => setSearchSong(e.target.value)}
-            />
-            <button
-              className="search-button"
-              type="button"
-              onClick={getSong}
-            >
-              Search
-            </button>
-          </div>
+        <>
+        <Center>
+          <Box w="sm">
+            <InputGroup mb="3">
+                <Input
+                  type="search"
+                  className="search-input"
+                  placeholder="Search"
+                  variant="filled"
+                  aria-label="Search"
+                  onChange={(e) => setSearchSong(e.target.value)}
+                />
+                <Button size="md" type="button" colorScheme="green" onClick={getSong}>
+                  Search
+                </Button>
+            </InputGroup>
+          </Box>
+        </Center>
+      </>
     );
   };
   

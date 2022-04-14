@@ -1,22 +1,46 @@
+import { Box, Flex, Image, Button, Text, Spacer } from "@chakra-ui/react";
+
 const Song = ({ uri, image, title, album, selectState, isSelected }) => {
   return (
-    <div className="playlist-container">
-      <div className="playlist-item">
-        <img className="song-image" src={image} alt="Album" />
-        <div className="song-desc">
-          <h5 className="song-title">{title}</h5>
-          <p className="song-album">{album}</p>
-        </div>
-      </div>
-      <button
-        className="playlist-action"
-        onClick={() => {
-          selectState(uri);
-        }}
+    <>
+      <Box
+        bgColor="gray.700"
+        borderRadius="md"
+        p="2"
+        mb="2"
+        ml="10"
+        mr="10"
+        onClick={() => selectState(uri)}
       >
-        {isSelected ? "Deselect" : "Select"}
-      </button>
-    </div>
+        <Flex align="center">
+          <Box>
+            <Flex align="center">
+              <Image
+                src={image}
+                alt="Album"
+                boxSize="100px"
+                borderRadius="md"
+              />
+              <Box ml="2">
+                <Text fontSize="lg" fontWeight="bold" textAlign="left">
+                  {title}
+                </Text>
+                <Text color="gray.400" textAlign="left">{album}</Text>
+              </Box>
+            </Flex>
+          </Box>
+          <Spacer />
+          <Button
+            colorScheme="green"
+            onClick={() => {
+              selectState(uri);
+            }}
+          >
+            {isSelected ? "Deselect" : "Select"}
+          </Button>
+        </Flex>
+      </Box>
+    </>
   );
 };
 

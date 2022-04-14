@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { retrieveUserId, createPlaylist, pushSongs } from "../../api/axios";
+import { InputGroup, Input, Button, Center, Box } from "@chakra-ui/react";
 
 const Form = ({ songUris }) => {
   const token = useSelector((state) => state.token.value);
@@ -61,39 +62,49 @@ const Form = ({ songUris }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-container">
-        <div className="playlist-box">
-          <div className="form-title">
-            <label htmlFor="title" className="form-title-text"></label>
-            <input
-              type="text"
-              className="form-title-input"
-              placeholder="Title"
-              name="title"
-              value={form.title}
-              onChange={handleForm}
-            />
-          </div>
-          <div className="form-desc">
-            <label htmlFor="title" className="form-desc-text"></label>
-            <input
-              type="text"
-              className="form-desc-input"
-              placeholder="Description"
-              name="description"
-              value={form.description}
-              onChange={handleForm}
-            />
-          </div>
-          <div>
-            <button id="submit" type="submit" className="createplaylist-button">
-              Create
-            </button>
-          </div>
-        </div>
-      </div>
-    </form>
+    <>
+      <Center>
+        <Box w="auto">
+          <form onSubmit={handleSubmit}>
+            <div className="form-container">
+              <div className="playlist-box">
+                <div className="form-title">
+                  <label htmlFor="title" className="form-title-text"></label>
+                  <InputGroup mb="5">
+                    <Input
+                      type="text"
+                      className="form-title-input"
+                      placeholder="Title"
+                      name="title"
+                      variant="filled"
+                      value={form.title}
+                      onChange={handleForm}
+                    />
+                  </InputGroup>
+                </div>
+                <div className="form-desc">
+                  <label htmlFor="title" className="form-desc-text"></label>
+                  <Input
+                    type="text"
+                    className="form-desc-input"
+                    placeholder="Description"
+                    name="description"
+                    variant="filled"
+                    value={form.description}
+                    onChange={handleForm}
+                  />
+                </div>
+                <div>
+                  <Button size="md" type="button" colorScheme="green" mt="5">
+                    Create
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </Box>
+      </Center>
+    </>
   );
 };
 
