@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Song from "../../components/Song";
 import Search from "../../components/Search";
 import { retrieveSongs } from "../../api/axios";
+import { Text } from "@chakra-ui/react";
 
 import Form from "../../components/Form";
 
@@ -41,9 +42,9 @@ const PlaylistPage = () => {
   return (
     <div>
       <div className="playlist-header">
-        <h2>
+        <Text fontSize="50px" fontWeight="bold" mb="7">
           Create Playlist
-        </h2>
+        </Text>
       </div>
       <Search getSong={getSong} setSearchSong={setSearchSong} />
       <Form songUris={selectedSongs} />
