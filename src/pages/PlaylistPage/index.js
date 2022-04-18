@@ -43,7 +43,7 @@ const PlaylistPage = () => {
     <div>
       <div className="playlist-header">
         <Text fontSize="50px" fontWeight="bold" mb="7">
-          Create Playlist
+          Spotify Playlist Creator
         </Text>
       </div>
       <Search getSong={getSong} setSearchSong={setSearchSong} />
@@ -51,14 +51,16 @@ const PlaylistPage = () => {
 
       <div className="song-list">
         {combineSongs.map((song) => {
-          const { uri, name, artists, album, isSelected } = song;
+          const { uri, name, artists, album, duration_ms, isSelected } = song;
           return (
             <Song
               key={uri}
               uri={uri}
               image={album.images[0]?.url}
               title={name}
-              album={artists[0]?.name}
+              artists={artists[0]?.name}
+              album={album.name}
+              duration={duration_ms}
               selectState={handleSelect}
               isSelected={isSelected}
             />

@@ -6,7 +6,12 @@ import {
     Input,
   } from "@chakra-ui/react";
 
-const Search = ({ setSearchSong, getSong }) => {
+  interface searchInterface {
+    setSearchSong: (value: string) => void;
+    getSong: () => void;
+  }
+  
+  const Search = ({ setSearchSong, getSong }: searchInterface) => {
     return (
         <>
         <Center>

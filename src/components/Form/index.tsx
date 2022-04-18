@@ -3,8 +3,16 @@ import { useSelector } from "react-redux";
 import { retrieveUserId, createPlaylist, pushSongs } from "../../api/axios";
 import { InputGroup, Input, Button, Center, Box } from "@chakra-ui/react";
 
-const Form = ({ songUris }) => {
-  const token = useSelector((state) => state.token.value);
+interface selectedInterface {
+  uri: string;
+}
+
+interface songUrisInterface {
+  songUris: selectedInterface["uri"];
+}
+
+const Form = ({ songUris }: songUrisInterface) => {
+  const token = useSelector((state: any) => state.token.value);
   const [playlistId, setPlaylistId] = useState("");
   const [userId, setUserId] = useState("");
   const [form, setForm] = useState({
@@ -39,12 +47,12 @@ const Form = ({ songUris }) => {
     getUserId();
   }, [playlistId, songUris, token]);
 
-  const handleForm = (e) => {
+  const handleForm = (e: any) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     if (form.title.length > 10) {
       createPlaylist(userId, form.title, form.description, token)

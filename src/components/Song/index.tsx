@@ -1,6 +1,17 @@
 import { Box, Flex, Image, Button, Text, Spacer } from "@chakra-ui/react";
 
-const Song = ({ uri, image, title, album, selectState, isSelected }) => {
+interface songInterface {
+  uri: string;
+  image: string;
+  title: string;
+  album: string;
+  artists: string;
+  duration: string;
+  selectState: (uri: string) => void;
+  isSelected: boolean;
+}
+
+const Song = ({ uri, image, title, album, artists, duration, selectState, isSelected }: songInterface) => {
   return (
     <>
       <Box

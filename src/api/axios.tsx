@@ -8,7 +8,7 @@ const instance = axios.create({
   },
 });
 
-const retrieveSongs = (searchSong, token) => {
+const retrieveSongs = (searchSong: string, token: string) => {
   return instance.get(`/search`, {
     params: {
       q: searchSong,
@@ -20,7 +20,7 @@ const retrieveSongs = (searchSong, token) => {
   });
 };
 
-const retrieveUserId = (token) => {
+const retrieveUserId = (token: string) => {
   return instance.get(`/me`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -28,7 +28,7 @@ const retrieveUserId = (token) => {
   });
 };
 
-const createPlaylist = (userId, title, description, token) => {
+const createPlaylist = (userId: string, title: string, description: string, token: string) => {
   return instance.post(
     `/users/${userId}/playlists`,
     {
@@ -45,7 +45,7 @@ const createPlaylist = (userId, title, description, token) => {
   );
 };
 
-const pushSongs = (playlistId, songUris, token) => {
+const pushSongs = (playlistId: string, songUris: any, token: string) => {
   return instance.post(
     `/playlists/${playlistId}/tracks`,
     {
