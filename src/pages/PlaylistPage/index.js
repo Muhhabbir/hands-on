@@ -47,7 +47,7 @@ const PlaylistPage = () => {
   return (
     <div>
       <div className="playlist-header">
-        <Text color="blue.200" fontSize="70px" fontWeight="bold" mb="10">
+        <Text color="blue.200" fontSize="70px" fontWeight="bold" mb="6">
           Spotify Playlist Creator
         </Text>
         <Button
