@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Song from "../../components/Song";
 import Search from "../../components/Search";
 import { retrieveSongs } from "../../api/axios";
-import { Text } from "@chakra-ui/react";
+import { Text, Button } from "@chakra-ui/react";
 
 import Form from "../../components/Form";
 
@@ -13,6 +13,7 @@ const PlaylistPage = () => {
   const [songData, setSongData] = useState([]);
   const [selectedSongs, setSelectedSongs] = useState([]);
   const [combineSongs, setCombineSongs] = useState([]);
+  const REDIRECT_URI = "http://localhost:3000/";
 
   useEffect(() => {
     const handleCombineTracks = songData.map((song) => ({
@@ -39,12 +40,23 @@ const PlaylistPage = () => {
       : setSelectedSongs([...selectedSongs, uri]);
   };
 
+  const handleLogout = ()=>{
+    window.location = REDIRECT_URI;
+}
+
   return (
     <div>
       <div className="playlist-header">
-        <Text fontSize="50px" fontWeight="bold" mb="7">
+        <Text color="blue.200" fontSize="70px" fontWeight="bold" mb="10">
           Spotify Playlist Creator
         </Text>
+        <Button
+            colorScheme="blue" mb="30px"
+            onClick={() => {
+              handleLogout();
+            }}
+          >Logout
+          </Button>
       </div>
       <Search getSong={getSong} setSearchSong={setSearchSong} />
       <Form songUris={selectedSongs} />

@@ -25,7 +25,7 @@ import {
                   aria-label="Search"
                   onChange={(e) => setSearchSong(e.target.value)}
                 />
-                <Button size="md" type="button" colorScheme="green" onClick={getSong}>
+                <Button size="md" type="button" colorScheme="blue" onClick={getSong}>
                   Search
                 </Button>
             </InputGroup>

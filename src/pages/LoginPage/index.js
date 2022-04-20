@@ -21,8 +21,8 @@ const LoginPage = () => {
 
   return (
     <>
-      <Center h="100px">
-        <Box p="3" bgColor="green.300" borderRadius="md">
+      <Center h="200px">
+        <Box p="5" bgColor="blue.400" borderRadius="20px">
               <Link href={url} color="black">
                 Login To Spotify
               </Link>

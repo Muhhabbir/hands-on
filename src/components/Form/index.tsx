@@ -72,7 +72,7 @@ const Form = ({ songUris }: songUrisInterface) => {
   return (
     <>
       <Center>
-        <Box w="auto">
+        <Box m="auto">
           <form onSubmit={handleSubmit}>
             <div className="form-container">
               <div className="playlist-box">
@@ -103,7 +103,7 @@ const Form = ({ songUris }: songUrisInterface) => {
                   />
                 </div>
                 <div>
-                  <Button size="md" type="button" colorScheme="green" mt="5">
+                  <Button size="md" type="submit" colorScheme="blue" mt="5">
                     Create
                   </Button>
                 </div>
