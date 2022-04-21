@@ -1,5 +1,5 @@
 var client_id = "ad45be373e994578a706094346a2bf71";
-var redirect_uri = "http://localhost:3000";
+var redirect_uri = "https://fp-spotify-gg.vercel.app/";
 
 var state = "KM_G2FE4286MUHHABBIR";
 

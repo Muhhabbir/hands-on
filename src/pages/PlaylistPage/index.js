@@ -13,7 +13,7 @@ const PlaylistPage = () => {
   const [songData, setSongData] = useState([]);
   const [selectedSongs, setSelectedSongs] = useState([]);
   const [combineSongs, setCombineSongs] = useState([]);
-  const REDIRECT_URI = "http://localhost:3000/";
+  const REDIRECT_URI = "https://fp-spotify-gg.vercel.app/";
 
   useEffect(() => {
     const handleCombineTracks = songData.map((song) => ({
